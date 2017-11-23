@@ -6,3 +6,4 @@ It's the first project in the book.
 
 ## GeoQuizChallengeChapter2
 The challenge of the GeoQuiz in chapter2.
+
