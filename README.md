@@ -5,7 +5,7 @@ Android Programming3e
 It's the first project in the book.
 
 ## GeoQuizChallengeChapter2
-The challenge of the GeoQuiz in chapter2. **Incluing**:
+The challenge of the GeoQuiz in chapter2. **Including**:
 - Click TextView to next question.
 
 ## GeoQuizChallengeChapter3
