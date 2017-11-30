@@ -4,10 +4,12 @@ import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.NumberFormat;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -28,7 +30,11 @@ public class QuizActivity extends AppCompatActivity {
             new Question(R.string.question_asia, true)
     };
 
+    private boolean[] mAnsweredQuestionBank = new boolean[] {false, false, false, false, false, false};
+
     private int mCurrentIndex = 0;
+    private int mAnsweredQuestions = 0;
+    private int mRightAnswers = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,12 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(true);
+                mAnsweredQuestions++;
+                showGrade();
+                mAnsweredQuestionBank[mCurrentIndex] = true;
+                // disable the buttons after answering the question
+                mTrueButton.setEnabled(false);
+                mFalseButton.setEnabled(false);
             }
         });
 
@@ -56,6 +68,12 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 checkAnswer(false);
+                mAnsweredQuestions++;
+                showGrade();
+                mAnsweredQuestionBank[mCurrentIndex] = true;
+                // disable the buttons after answering the question
+                mTrueButton.setEnabled(false);
+                mFalseButton.setEnabled(false);
             }
         });
 
@@ -65,6 +83,14 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
                 updateQuestion();
+                // disable the buttons after answering the question
+                if (mAnsweredQuestionBank[mCurrentIndex]) {
+                    mTrueButton.setEnabled(false);
+                    mFalseButton.setEnabled(false);
+                } else {
+                    mTrueButton.setEnabled(true);
+                    mFalseButton.setEnabled(true);
+                }
             }
         });
     }
@@ -117,10 +143,26 @@ public class QuizActivity extends AppCompatActivity {
 
         if (userPressedTrue == answerTrue) {
             messageResId = R.string.correct_toast;
+            mRightAnswers++;
         } else {
             messageResId = R.string.incorrect_toast;
         }
 
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+    }
+
+    // showGrade
+    private void showGrade() {
+        Log.d(TAG, String.valueOf(mAnsweredQuestions));
+        if (mAnsweredQuestions == mQuestionBank.length) {
+            double Grade = 1.0 * mRightAnswers / mQuestionBank.length;
+            // percentage
+            NumberFormat GradeNF = NumberFormat.getPercentInstance();
+            GradeNF.setMinimumFractionDigits(2);
+            Toast GradeToast = Toast.makeText(QuizActivity.this,
+                    GradeNF.format(Grade), Toast.LENGTH_SHORT);
+            GradeToast.setGravity(Gravity.TOP, 0, 0);
+            GradeToast.show();
+        }
     }
 }
