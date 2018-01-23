@@ -17,6 +17,14 @@ public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
     private static final String KEY_IS_CHEATER = "is_cheater";
     private static final int REQUEST_CODE_CHEAT = 0;
+    private static final String KEY_IS_CHEAT_DISABLED = "is_cheat_disabled";
+    private static final String KET_CHEAT_TIMES = "cheat_times";
+
+    private static final int MAX_CHEAT_TIMES = 3;
+
+    private boolean mCheatIsDisabled = false;
+
+    private int mCheatTimes = 0;
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -47,6 +55,8 @@ public class QuizActivity extends AppCompatActivity {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
             // need to restore the whole boolean array
             mIsCheaterBank = savedInstanceState.getBooleanArray(KEY_IS_CHEATER);
+            mCheatIsDisabled = savedInstanceState.getBoolean(KEY_IS_CHEAT_DISABLED);
+            mCheatTimes = savedInstanceState.getInt(KET_CHEAT_TIMES);
         }
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text_view);
@@ -78,6 +88,10 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         mCheatButton = (Button) findViewById(R.id.cheat_button);
+        mCheatButton.setText(getString(R.string.cheat_button, MAX_CHEAT_TIMES - mCheatTimes));
+        if (mCheatIsDisabled) {
+            mCheatButton.setEnabled(false);
+        }
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +101,12 @@ public class QuizActivity extends AppCompatActivity {
                 Intent intent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
                 // startActivity(intent);
                 startActivityForResult(intent, REQUEST_CODE_CHEAT);
+                mCheatTimes++;
+                mCheatButton.setText(getString(R.string.cheat_button, MAX_CHEAT_TIMES - mCheatTimes));
+                if (mCheatTimes >= MAX_CHEAT_TIMES) {
+                    mCheatButton.setEnabled(false);
+                    mCheatIsDisabled = true;
+                }
             }
         });
     }
@@ -130,6 +150,8 @@ public class QuizActivity extends AppCompatActivity {
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
         // need to store the whole boolean array
         savedInstanceState.putBooleanArray(KEY_IS_CHEATER, mIsCheaterBank);
+        savedInstanceState.putBoolean(KEY_IS_CHEAT_DISABLED, mCheatIsDisabled);
+        savedInstanceState.putInt(KET_CHEAT_TIMES, mCheatTimes);
     }
 
     @Override
