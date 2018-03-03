@@ -24,3 +24,7 @@ These challenges are shown in GeoQuiz.
 The challenges of the GeoQuiz in Chapter6. **Including**:
 - Show the API Level in CheatActivity layer.
 - Set the maximum times to cheat as 3 and show the remaining times to cheat. When meet this bound, disable the cheat button.
+
+## CriminalIntent
+Contains the CriminalIntent app without challenges.
+
