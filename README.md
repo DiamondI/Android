@@ -31,3 +31,7 @@ Contains the CriminalIntent app without challenges.
 ## CriinalIntentChallengeChapter8
 The challenge of the CriminalIntent in Chapter8. **Including**:
 - Adding an mRequiresPolice variable, and determine which view should be loaded to CrimeAdapter using it by method getItemViewType(int). At method onCreateViewHolder(ViewHolder, int), based on the returned value by method getItemViewType(int), return different ViewHolder. If it's a general crime, then use the original layout. Otherwise, use a layout with a button used to contact police.
+
+## CriminalIntentChallengeChapter9
+The challenge of the CriminalIntent in Chapter9. **Including**:
+- Use the date format like "Jul 22, 2016"; create and use the date format like "Friday, Jul 22, 2016".
