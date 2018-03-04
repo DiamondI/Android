@@ -28,3 +28,6 @@ The challenges of the GeoQuiz in Chapter6. **Including**:
 ## CriminalIntent
 Contains the CriminalIntent app without challenges.
 
+## CriinalIntentChallengeChapter8
+The challenge of the CriminalIntent in Chapter8. **Including**:
+- Adding an mRequiresPolice variable, and determine which view should be loaded to CrimeAdapter using it by method getItemViewType(int). At method onCreateViewHolder(ViewHolder, int), based on the returned value by method getItemViewType(int), return different ViewHolder. If it's a general crime, then use the original layout. Otherwise, use a layout with a button used to contact police.
