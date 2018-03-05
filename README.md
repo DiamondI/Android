@@ -35,3 +35,8 @@ The challenge of the CriminalIntent in Chapter8. **Including**:
 ## CriminalIntentChallengeChapter9
 The challenge of the CriminalIntent in Chapter9. **Including**:
 - Use the date format like "Jul 22, 2016"; create and use the date format like "Friday, Jul 22, 2016".
+
+## CriminalIntentChallengeChapter10
+The challenges of the CriminalIntent in Chapter10. **Including**:
+- Just one crime would be updated once, and thus the method notifyDataChanged is not efficient enough since it will update all visible list items. Try to improve this by only updating the changed crime using method notifyItemChanged(Int).
+- The method getCrime(UUID) in CrimeLab is good, but the process of searching the crime ID can be improved. Try to improve the process.
