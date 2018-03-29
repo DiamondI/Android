@@ -40,3 +40,9 @@ The challenge of the CriminalIntent in Chapter9. **Including**:
 The challenges of the CriminalIntent in Chapter10. **Including**:
 - Just one crime would be updated once, and thus the method notifyDataChanged is not efficient enough since it will update all visible list items. Try to improve this by only updating the changed crime using method notifyItemChanged(Int).
 - The method getCrime(UUID) in CrimeLab is good, but the process of searching the crime ID can be improved. Try to improve the process.
+
+## CriminalIntentChallengeChapter11
+
+The challenges of the CriminalIntent in Chapter11. **Including**:
+- The margins of CrimeFragment is missing, since the layout parameters of ViewPager don't support margins setting. Please change the fragment\_crime.xml, to let the margins visible.
+- Add two buttons to CrimePagerActivity, allow them to jump to the first crime and last crime. But need to control that when at the first crime, the Jump to First button is supposed to be disabled, and so as the Jump to Last button when at the last crime.
